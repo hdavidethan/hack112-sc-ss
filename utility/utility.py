@@ -48,11 +48,11 @@ class AssetLoader:
         
     @staticmethod
     def loadImage(app, url, size=None):
-        if size is not None:
-            height, width = size
-            img = app.loadImage(url)
-            img.resize(width, height)
-            return ImageTk.PhotoImage(img)
-        else:
-            img = app.loadImage(url)
-            return ImageTk.PhotoImage(img)
+        # if size is not None:
+        #     height, width = size
+        #     img = app.loadImage(url)
+        #     img = img.resize(width, height)
+        #     return ImageTk.PhotoImage(img)
+        # else:
+        img = app.loadImage(url)
+        return ImageTk.PhotoImage(img)
