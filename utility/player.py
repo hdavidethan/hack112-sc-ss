@@ -5,9 +5,10 @@ class Player:
         self.x = 0
         self.y = 0
         self.mode = mode
+        self.sex = None
 
         self.currentYear = 1
-        self.graduationYear = 5
+        self.graduationYear = 4
         self.radius = 0.5 * self.mode.gridSize
 
     def movePlayer(self, dx, dy):
@@ -33,9 +34,12 @@ class Player:
             mode.scrollY = py + self.radius - mode.height + mode.margin
 
     def draw(self, mode, canvas):
+        img = mode.app.assets[self.sex]
         sx, sy = mode.scrollX, mode.scrollY
-        r = self.radius
         cx, cy = mode.getBounds(self.x, self.y)
-        canvas.create_oval(cx-r-sx, cy-r-sy, cx+r-sx, cy+r-sy)
+        canvas.create_image(cx - sx, cy - sy, image=img)
+
+    def getLevel(self):
+        return min(self.currentYear, 5)
 
     
