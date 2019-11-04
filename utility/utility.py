@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
+import pygame
 
 class AssetLoader:
     @staticmethod

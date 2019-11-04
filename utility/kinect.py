@@ -13,13 +13,13 @@ from constants import Constants
 from modes.game import *
 
 class GameRuntime(object):
-    def __init__(self, app):
+    def __init__(self):
         pygame.init()
         pygame.mixer.Channel(0).play(pygame.mixer.Sound("assets/sounds/theme.wav"))
 
         self.screenWidth = Constants.SCREEN_WIDTH
         self.screenHeight = Constants.SCREEN_HEIGHT
-        self.app = app
+        self.app = None
 
         self.prevSpineBaseX = 0
         self.prevSpineBaseY = 0
@@ -69,6 +69,9 @@ class GameRuntime(object):
         self.bodies = None
 
     def changeDirection(self):
+        app = self.app
+        if app is None or app._activeMode != app.modes["game"]:
+            return
         self.changeYPosition=self.differenceSpineBaseY*80
         self.changeXPosition=self.differenceSpineBaseX*80
 

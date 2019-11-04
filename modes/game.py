@@ -16,6 +16,7 @@ class GameMode(Mode):
         mode.player = Player(mode)
         mode.player.sex = mode.app.playerSex
         mode.levelStarted()
+        mode.app.instance.game.app = mode.app
 
     def levelStarted(mode, repeat=False):
         mode.scrollX = 0
@@ -46,9 +47,7 @@ class GameMode(Mode):
             mode.margin+(row+0.5)*mode.gridSize)
 
     def direction(mode, dir):
-        if mode.showWelcome:
-            mode.showWelcome = False
-            return
+        
         player = mode.player
         oldX, oldY = player.x, player.y
         if (dir == 'Right'):
@@ -108,8 +107,7 @@ class GameMode(Mode):
         mode.drawProblems(canvas)
         mode.drawPlayer(canvas)
         mode.drawGUI(canvas)
-        if mode.showWelcome:
-            mode.drawWelcome(canvas)
+       
 
     def drawWelcome(mode, canvas):
         year = mode.player.currentYear

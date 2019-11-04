@@ -10,7 +10,8 @@ from modes.game import GameMode
 from modes.end import EndGameMode
 from utility.utility import AssetLoader
 from utility.kinect import *
-import pygame.mixer
+import pygame
+from threading import Thread
 
 import random
 
@@ -18,15 +19,18 @@ class SurvivingCollege(ModalApp):
     MODE_GAME =  "game"
     MODE_SPLASH = "splash"
 
+    def __init__(self, width=0, height=0, game=None):
+        self.game = game
+        super().__init__(width=width, height=height)
+        
+
     def appStarted(app):
+        pygame.init()
         app.assets = AssetLoader.loadAssets(app, app.height, app.width)
         app.initializeModes()
         app.changeMode("splash")
         app.playerSex = None
-
-        app.kinectGame = GameRuntime(app)
-        app.kinectGame.calibrate()
-        app.kinectGame.run()
+        app.instance=  app
 
         pygame.mixer.Channel(0).play(app.assets["theme"], loops=-1)
         
@@ -41,4 +45,10 @@ class SurvivingCollege(ModalApp):
         app.setActiveMode(app.modes[mode])
 
 if __name__ == "__main__":
-    SurvivingCollege(width=Constants.SCREEN_WIDTH, height=Constants.SCREEN_HEIGHT)
+    kinectGame = GameRuntime()
+    kinectGame.calibrate()
+    thread1 = Thread(target = kinectGame.run)
+    thread2 = Thread(target = lambda: SurvivingCollege(width=Constants.SCREEN_WIDTH, height=Constants.SCREEN_HEIGHT, game=kinectGame))
+    thread1.start()
+    thread2.start()
+    

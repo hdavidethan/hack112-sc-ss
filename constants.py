@@ -3,8 +3,8 @@ class Constants:
     PAUSE_BG = "black"
 
     # Change these values to match screen resolution!
-    SCREEN_WIDTH = 1920
-    SCREEN_HEIGHT = 1080
+    SCREEN_WIDTH = 960
+    SCREEN_HEIGHT = 780
 
     gridWidth = 25
     gridHeight = 15
