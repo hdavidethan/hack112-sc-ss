@@ -74,8 +74,6 @@ class GameMode(Mode):
 
 
     def timerFired(mode):
-        if mode.showWelcome:
-            return
         if (mode.player.x == Constants.gridWidth-1 and mode.player.y == Constants.gridHeight-1):
             mode.levelUp()
         moveTiles = mode.tickCounter % mode.delay == 0

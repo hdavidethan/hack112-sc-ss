@@ -12,6 +12,7 @@ from utility.utility import AssetLoader
 from utility.kinect import *
 import pygame
 from threading import Thread
+from constants import Constants
 
 import random
 
